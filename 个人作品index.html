@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电商摄影 | 视频剪辑作品集</title>
+    <style>
+        /* 全局配色-深空影视黑 */
+        :root {
+            --bg-main: #08080C;
+            --bg-card: #12121A;
+            --accent: #4A90E2;
+            --text-white: #F5F5F7;
+            --text-gray: #888899;
+            --glow: 0 0 12px rgba(74, 144, 226, 0.45);
+        }
+        * {margin:0;padding:0;box-sizing:border-box;}
+        body {
+            background: var(--bg-main);
+            color: var(--text-white);
+            font-family: "PingFang SC","Microsoft YaHei",sans-serif;
+            line-height: 1.6;
+        }
+        /* 导航栏 */
+        nav {
+            position: fixed;
+            width: 100%;
+            top:0;
+            z-index:99;
+            background: rgba(8,8,12,0.92);
+            padding: 18px 5%;
+            display:flex;
+            justify-content: space-between;
+            align-items:center;
+            border-bottom: 1px solid rgba(74,144,226,0.15);
+        }
+        .logo {font-size:20px;font-weight:bold;color:var(--text-white);}
+        .nav-a {color:var(--text-gray);text-decoration:none;margin-left:24px;transition:0.3s;}
+        .nav-a:hover {color:var(--accent);}
+
+        /* 首页全屏Banner */
+        .banner {
+            width:100%;
+            height: 100vh;
+            position:relative;
+            overflow:hidden;
+            margin-top:60px;
+        }
+        .banner-video {
+            width:100%;height:100%;
+            object-fit:cover;
+            opacity:0.75;
+        }
+        .banner-text {
+            position:absolute;
+            top:50%;left:50%;
+            transform:translate(-50%,-50%);
+            text-align:center;
+            z-index:2;
+        }
+        .banner-text h1 {font-size:48px;margin-bottom:16px;}
+        .banner-text p {font-size:18px;color:var(--text-gray);margin-bottom:30px;}
+        .btn {
+            padding:12px 32px;
+            border:1px solid var(--accent);
+            color:var(--accent);
+            text-decoration:none;
+            border-radius:2px;
+            transition:0.3s;
+        }
+        .btn:hover {background:var(--accent);color:#fff;box-shadow:var(--glow);}
+
+        /* 通用区块 */
+        section {padding: 80px 5%;}
+        .sec-title {
+            text-align:center;
+            font-size:32px;
+            margin-bottom:50px;
+            position:relative;
+        }
+        .sec-title::after {
+            content:"";
+            width:60px;height:2px;
+            background:var(--accent);
+            position:absolute;
+            left:50%;bottom:-15px;
+            transform:translateX(-50%);
+        }
+
+        /* 作品网格 15个适配 */
+        .work-grid {
+            display:grid;
+            grid-template-columns: repeat(5,1fr);
+            gap:24px;
+        }
+        .work-card {
+            background:var(--bg-card);
+            border-radius:6px;
+            overflow:hidden;
+            cursor:pointer;
+            transition:0.4s;
+            border:1px solid transparent;
+        }
+        .work-card:hover {
+            transform:translateY(-6px);
+            border-color:var(--accent);
+            box-shadow:var(--glow);
+        }
+        .work-cover {width:100%;aspect-ratio:16/9;object-fit:cover;}
+        .work-name {padding:12px;text-align:center;font-size:14px;color:var(--text-gray);}
+
+        /* 分类适配 15条分配：6+5+4 */
+        @media (max-width:1200px){.work-grid{grid-template-columns:repeat(3,1fr);}}
+        @media (max-width:768px){.work-grid{grid-template-columns:repeat(2,1fr);}}
+
+        /* 弹窗播放 */
+        .modal {
+            position:fixed;
+            top:0;left:0;width:100%;height:100%;
+            background:rgba(0,0,0,0.92);
+            z-index:1000;
+            display:none;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+        }
+        .modal-video {max-width:90%;max-height:80vh;}
+        .close {
+            position:absolute;
+            top:30px;right:50px;
+            font-size:36px;color:#fff;
+            cursor:pointer;
+        }
+
+        /* 关于&联系 */
+        .about,.contact {max-width:800px;margin:0 auto;text-align:center;color:var(--text-gray);}
+        .about p,.contact p {margin-bottom:16px;font-size:16px;}
+        footer {text-align:center;padding:40px;color:var(--text-gray);border-top:1px solid rgba(74,144,226,0.15);}
+    </style>
+</head>
+<body>
+    <!-- 导航 -->
+    <nav>
+        <div class="logo">Video Photography Portfolio</div>
+        <div>
+            <a href="#home" class="nav-a">首页</a>
+            <a href="#work1" class="nav-a">种草短片</a>
+            <a href="#work2" class="nav-a">食品实拍</a>
+            <a href="#work3" class="nav-a">氛围大片</a>
+            <a href="#about" class="nav-a">关于我</a>
+            <a href="#contact" class="nav-a">合作联系</a>
+        </div>
+    </nav>
+
+    <!-- 首页Banner【粘贴你的Cloudinary片头视频链接】 -->
+    <section class="banner" id="home">
+        <video class="banner-video" autoplay muted loop playsinline>
+            <source src="https://res.cloudinary.com/dleo1mjh5/video/upload/v1775201555/12_zx31v4.mp4" type="video/mp4">
+        </video>
+        <div class="banner-text">
+            <h1>电商静物摄影 · 影视级调色剪辑</h1>
+            <p>专注产品实拍 / 食品农产品 / 9:16竖屏带货短片</p>
+            <a href="#work1" class="btn">浏览作品集</a>
+        </div>
+    </section>
+
+    <!-- 分类1：竖屏种草 6个【粘贴6个视频外链】 -->
+    <section id="work1">
+        <h2 class="sec-title">竖屏9:16 种草短片</h2>
+        <div class="work-grid">
+            <div class="work-card" data-src="https://res.cloudinary.com/dleo1mjh5/video/upload/v1775201553/14_wmefui.mp4"><img class="work-cover" src="videos/cover1.jpg"><div class="work-name">自定义作品名01</div></div>
+            <div class="work-card" data-src="https://res.cloudinary.com/dleo1mjh5/video/upload/v1775201549/15_shvkts.mov"><img class="work-cover" src="videos/cover2.jpg"><div class="work-name">自定义作品名02</div></div>
+            <div class="work-card" data-src="https://res.cloudinary.com/dleo1mjh5/video/upload/v1775201549/banner-top_ifwn8n.mov"><img class="work-cover" src="videos/cover3.jpg"><div class="work-name">自定义作品名03</div></div>
+            <div class="work-card" data-src="https://res.cloudinary.com/dleo1mjh5/video/upload/v1775201548/8_u8giai.mp4"><img class="work-cover" src="videos/cover4.jpg"><div class="work-name">自定义作品名04</div></div>
+            <div class="work-card" data-src="https://res.cloudinary.com/dleo1mjh5/video/upload/v1775201547/9_jufwbu.mp4"><img class="work-cover" src="videos/cover5.jpg"><div class="work-name">自定义作品名05</div></div>
+            <div class="work-card" data-src="https://res.cloudinary.com/dleo1mjh5/video/upload/v1775201546/4_swwm5y.mov"><img class="work-cover" src="videos/cover6.jpg"><div class="work-name">自定义作品名06</div></div>
+        </div>
+    </section>
+
+    <!-- 分类2：食品农产品 5个【粘贴5个视频外链】 -->
+    <section id="work2">
+        <h2 class="sec-title">食品/农产品 实拍剪辑</h2>
+        <div class="work-grid">
+            <div class="work-card" data-src="https://res.cloudinary.com/dleo1mjh5/video/upload/v1775201543/5_vi9pdb.mov"><img class="work-cover" src="videos/cover7.jpg"><div class="work-name">食材实拍短片01</div></div>
+            <div class="work-card" data-src="https://res.cloudinary.com/dleo1mjh5/video/upload/v1775201540/7_hqgvlq.mov"><img class="work-cover" src="videos/cover8.jpg"><div class="work-name">食材实拍短片02</div></div>
+            <div class="work-card" data-src="https://res.cloudinary.com/dleo1mjh5/video/upload/v1775201540/2_tbe5th.mov"><img class="work-cover" src="videos/cover9.jpg"><div class="work-name">食材实拍短片03</div></div>
+            <div class="work-card" data-src="https://res.cloudinary.com/dleo1mjh5/video/upload/v1775201533/10_bvfmpb.mov"><img class="work-cover" src="videos/cover10.jpg"><div class="work-name">食材实拍短片04</div></div>
+            <div class="work-card" data-src="https://res.cloudinary.com/dleo1mjh5/video/upload/v1775201525/13_ltoxat.mov"><img class="work-cover" src="videos/cover11.jpg"><div class="work-name">食材实拍短片05</div></div>
+        </div>
+    </section>
+
+    <!-- 分类3：氛围质感大片 4个【粘贴4个视频外链】 -->
+    <section id="work3">
+        <h2 class="sec-title">品牌氛围 质感大片</h2>
+        <div class="work-grid">
+            <div class="work-card" data-src="https://res.cloudinary.com/dleo1mjh5/video/upload/v1775201510/6_m3eqww.mov"><img class="work-cover" src="videos/cover12.jpg"><div class="work-name">品牌氛围短片01</div></div>
+            <div class="work-card" data-src="https://res.cloudinary.com/dleo1mjh5/video/upload/v1775201508/3_ngyk4p.mov"><img class="work-cover" src="videos/cover13.jpg"><div class="work-name">品牌氛围短片02</div></div>
+            <div class="work-card" data-src="https://res.cloudinary.com/dleo1mjh5/video/upload/v1775201505/1_rnid2a.mov"><img class="work-cover" src="videos/cover14.jpg"><div class="work-name">品牌氛围短片03</div></div>
+            <div class="work-card" data-src="https://res.cloudinary.com/dleo1mjh5/video/upload/v1775201547/9_jufwbu.mp4"><img class="work-cover" src="videos/cover15.jpg"><div class="work-name">品牌氛围短片04</div></div>
+        </div>
+    </section>
+
+    <!-- 关于我 -->
+    <section id="about">
+        <h2 class="sec-title">关于我</h2>
+        <div class="about">
+            <p>专注电商产品静物摄影、食品农产品实拍、短视频剪辑调色全流程制作</p>
+            <p>擅长：布光构图 / 微距细节拍摄 / PR/AE剪辑 / 影视LUT调色 / 9:16竖屏带货节奏包装</p>
+            <p>长期服务杂粮、香辛料、家居好物、日用百货等电商类目视觉视频制作</p>
+        </div>
+    </section>
+
+    <!-- 联系【改成你的联系方式】 -->
+    <section id="contact">
+        <h2 class="sec-title">合作联系</h2>
+        <div class="contact">
+            <p>邮箱：your-email@xxx.com</p>
+            <p>微信：你的微信（可备注商务合作）</p>
+            <p>承接：电商短视频定制、产品实拍、后期精剪调色全案</p>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer>© 2026 电商摄影视频剪辑作品集 All Rights Reserved</footer>
+
+    <!-- 视频弹窗 -->
+    <div class="modal" id="videoModal">
+        <span class="close" onclick="closeModal()">×</span>
+        <video class="modal-video" controls autoplay></video>
+    </div>
+
+    <script>
+        // 弹窗播放视频
+        const cards = document.querySelectorAll('.work-card');
+        const modal = document.getElementById('videoModal');
+        const modalVideo = modal.querySelector('.modal-video');
+
+        cards.forEach(card=>{
+            card.addEventListener('click',()=>{
+                let src = card.dataset.src;
+                modalVideo.src = src;
+                modal.style.display = 'flex';
+            })
+        })
+        function closeModal(){
+            modal.style.display = 'none';
+            modalVideo.pause();
+        }
+        // 点击遮罩关闭
+        modal.addEventListener('click',e=>{
+            if(e.target === modal) closeModal();
+        })
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(a=>{
+            a.addEventListener('click',e=>{
+                e.preventDefault();
+                document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+            })
+        })
+    </script>
+</body>
+</html>
